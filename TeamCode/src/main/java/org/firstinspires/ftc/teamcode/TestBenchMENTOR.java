@@ -34,6 +34,7 @@ public class TestBenchMENTOR extends OpMode {
 }*/
 
 //BUTTON ASSIGNMENT
+
 @TeleOp ()
 public class TestBenchMENTOR extends OpMode {
 
@@ -62,6 +63,10 @@ public class TestBenchMENTOR extends OpMode {
         }
         else {
             bench.setServo0Pos(0);}
+
+        //touchSensor1 true/false
+        telemetry.addData("Touch Sensor State", bench.getTouchSensorState());
+
     }
 
 

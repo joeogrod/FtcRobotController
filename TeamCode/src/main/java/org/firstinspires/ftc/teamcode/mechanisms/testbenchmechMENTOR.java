@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.mechanisms;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -10,8 +11,11 @@ public class testbenchmechMENTOR {
     private DcMotor motor1;
     private Servo servo0;
     private Servo servo1;
+    private DigitalChannel touchSensor1;
+
 
     //initialization statement to pull object into OpMode Class
+    //HardwareMap is under the FTC base code, its how it knows to grab specific pieces of hardware attached to the Control Hub
     public void init (HardwareMap hwMap) {
 
         //DCMotor Code, deviceName exact name in Config/Driver Station
@@ -20,20 +24,28 @@ public class testbenchmechMENTOR {
         motor1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         //Servo0 Code, deviceName exact name in Config/Driver Station
         servo0 = hwMap.get(Servo.class, "servo0");
-
         //Servo1 Code, deviceName exact name in Config/Driver Station
         servo1 = hwMap.get(Servo.class, "servo1");
+        //touchSensor1 Code, deviceName exact name in Config/Driver Station
+        touchSensor1 = hwMap.get(DigitalChannel.class, "touchSensor1");
+        //set the touch sensor mode as input
+        touchSensor1.setMode(DigitalChannel.Mode.INPUT);
     }
 
     //set up setter method because op mode is separate from mech folder, this sets up how to control motor power, which is defined in the TestBenchClass
     public void setMotorSpeed(double speed) {
             motor1.setPower(speed);
     }
-    //set up setter method because op mode is separate from mech folder, this sets up how to control the servo, which is defined in the TestBenchClass
     public void setServo0Pos(double angle) {
         servo0.setPosition(angle);
     }
     public void setServo1Pos(double angle) {
         servo1.setPosition(angle);
     }
+    //set a getter method for the touch sensor as they "get" data versus needing a "set" value
+    // press = false
+    // public boolean getTouchSensorState() { return touchSensor1.getState();
+    public boolean getTouchSensorState() { return !touchSensor1.getState();
+    }
+
 }
